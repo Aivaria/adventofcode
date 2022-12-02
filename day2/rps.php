@@ -54,7 +54,6 @@ enum RPS
                     WLD::LOOSE => RPS::PAPER,
                 };
         };
-
     }
 
     public function score()

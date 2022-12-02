@@ -4,7 +4,7 @@ include "RPS.php";
 
 class rockpaper
 {
-    protected $choises;
+    protected $scores;
 
     public function __construct()
     {
