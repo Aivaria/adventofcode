@@ -17,12 +17,9 @@ class rucksack
         $score = 0;
         foreach ($this->rucksacks as $rucksack) {
             $compartments = $this->getCompartments($rucksack);
-            foreach (str_split($compartments[0]) as $letter) {
-                if (in_array($letter, str_split($compartments[1]))) {
-                    $score += array_search($letter, $this->alphabet) + 1;
-                    break;
-                }
-            }
+            $result = array_intersect(str_split($compartments[0]), str_split($compartments[1]));
+            $result = array_values($result)[0];
+            $score += array_search($result, $this->alphabet) + 1;
         }
         return $score;
     }
