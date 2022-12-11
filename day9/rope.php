@@ -13,11 +13,8 @@ class rope
 
     public function calcSteps($length = 2)
     {
-//        $input = array_map("unserialize", array_unique(array_map("serialize", $testvalue)));
-        $knots = [];
-        for ($i = 0; $i < $length; $i++) {
-            $knots[$i] = ['x' => 0, 'y' => 0];
-        }
+        $length=$length-1;
+        $knots = array_map([$this,'mapper'],range(0,$length));
         $touched = [];
 
         foreach ($this->steps as $key => $step) {
@@ -32,7 +29,7 @@ class rope
                     'D' => -1,
                     default => 0,
                 };
-                for ($knot = 0; $knot < $length - 1; $knot++) {
+                for ($knot = 0; $knot < $length; $knot++) {
                     if ((($knots[$knot]['x'] <=> $knots[$knot + 1]['x']) != ($knots[$knot]['x'] - $knots[$knot + 1]['x']))
                         || (($knots[$knot]['y'] <=> $knots[$knot + 1]['y']) != ($knots[$knot]['y'] - $knots[$knot + 1]['y']))) {
                         $knots[$knot + 1]['x'] += ($knots[$knot]['x'] <=> $knots[$knot + 1]['x']);
@@ -40,9 +37,12 @@ class rope
                     }
 
                 }
-                $touched['x' . $knots[$length - 1]['x'] . 'y' . $knots[$length - 1]['y']] = 1;
+                $touched['x' . $knots[$length]['x'] . 'y' . $knots[$length]['y']] = 1;
             }
         }
         return count($touched);
+    }
+    protected function mapper(){
+        return ['x'=>0, 'y'=>0];
     }
 }
