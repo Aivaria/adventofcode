@@ -10,7 +10,6 @@ $rope = new rope();
 <br />
 Rope Positions: <?=$rope->calcSteps();?><br />
 Rope Positions2: <?=$rope->calcSteps(10);?><br />
-<!--get Scenic Score: --><?//=$treehouse->getScenicScore();?><!--<br />-->
 <br />
 <a href="/">Zurück</a>
 </body>

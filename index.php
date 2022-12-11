@@ -1,6 +1,7 @@
 <?php
 $starttime = hrtime(true);
-$dirs = array_filter(glob('*'), 'is_dir');
+$dirs = array_filter(glob('day*'), 'is_dir');
+natsort($dirs);
 foreach ($dirs as $dir){
     $thisStart = hrtime(true);
     chdir($dir);
