@@ -1,56 +1,64 @@
 <?php
-include "WLD.php";
-include "RPS.php";
 
 class rockpaper
 {
     protected $scores;
+    protected $lines;
+    protected $rps;
 
     public function __construct()
     {
         $file = file_get_contents('inputfile.txt');
         $lines = explode(PHP_EOL, $file);
-        $scores = [];
-        foreach ($lines as $line) {
-            $partial = explode(" ", $line);
-            $other = match ($partial[0]) {
-                'A' => RPS::ROCK,
-                'B' => RPS::PAPER,
-                'C' => RPS::SCISSOR
-            };
-
-            $scores[] = ['choosen' => $partial[1], 'other' => $other];
-        }
-        $this->scores = $scores;
+        $this->lines = $lines;
+        $this->rps = ['a' => 1, 'x' => '1', 'b' => 2, 'y' => 2, 'c' => 3, 'z' => 3];
     }
 
     public function getScoreP1()
     {
-        $scoreSum = 0;
-        foreach ($this->scores as $score) {
-            $scoreSum += match ($score['choosen']) {
-                'X' => 1,
-                'Y' => 2,
-                'Z' => 3,
-            };
-            $scoreSum += $score['other']->getWLDP1($score['choosen'])->score();
+        $score = 0;
+        foreach ($this->lines as $line) {
+            $other = strtolower($line[0]);
+            $mine = strtolower($line[2]);
+
+            //draw
+            if ($this->rps[$other] == $this->rps[$mine]) {
+                $score += 3;
+            } elseif (in_array($other . $mine, ['ay', 'bz', 'cx'])) {
+                $score += 6;
+            }
+            $score += $this->rps[$mine];
         }
-        return $scoreSum;
+        return $score;
     }
 
     public function getScoreP2()
     {
-        $scoreSum = 0;
-        foreach ($this->scores as $score) {
-            $WLD = match ($score['choosen']) {
-                'X' => WLD::LOOSE,
-                'Y' => WLD::DRAW,
-                'Z' => WLD::WIN,
-            };
+        $score = 0;
+        foreach ($this->lines as $line) {
+            $other = strtolower($line[0]);
+            $mine = strtolower($line[2]);
 
-            $scoreSum += $score['other']->getWLDP2($WLD)->score();
-            $scoreSum += $WLD->score();
+            if ($mine == 'y') {
+                $score += 3;
+                $score += $this->rps[$other];
+            } elseif ($mine == 'z') {
+                $win = match ($other) {
+                    'a' => 'y',
+                    'b' => 'z',
+                    'c' => 'x',
+                };
+                $score += 6;
+                $score += $this->rps[$win];
+            } else {
+                $lost = match ($other) {
+                    'a' => 'z',
+                    'b' => 'x',
+                    'c' => 'y',
+                };
+                $score += $this->rps[$lost];
+            }
         }
-        return $scoreSum;
+        return $score;
     }
 }

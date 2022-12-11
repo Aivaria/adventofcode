@@ -39,10 +39,11 @@ class accessCalc
             $access1 = explode('-', $group[0]);
             $access2 = explode('-', $group[1]);
 
-            $range1 = range($access1[0], $access1[1]);
-            $range2 = range($access2[0], $access2[1]);
+            $range1 = array_flip(range($access1[0], $access1[1]));
+            $range2 = array_flip(range($access2[0], $access2[1]));
 
-            if(array_intersect($range1, $range2)){
+
+            if(array_intersect_key($range1, $range2)){
                 $count++;
             }
         }
