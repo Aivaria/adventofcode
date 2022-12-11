@@ -8,8 +8,8 @@ $treehouse = new treehouse();
 <body>
 <h1>Advent of Code, Day 8, Treehouse</h1>
 <br />
-Visible Trees from Outside Forest <?=$treehouse->countTrees();?><br />
-<!--Size of dir to Delete: --><?//=tr->freeDiskSpace();?><!--<br />-->
+Visible Trees from Outside Forest <?=$treehouse->getVisibleTrees();?><br />
+get Scenic Score: <?=$treehouse->getScenicScore();?><br />
 <br />
 <a href="/">Zurück</a>
 </body>
