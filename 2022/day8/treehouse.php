@@ -17,7 +17,7 @@ class treehouse
         $this->indexTrees();
     }
 
-    public function indexTrees()
+    protected function indexTrees()
     {
         $trees = $this->trees;
         for ($y = 0; $y < count($trees); $y++) {

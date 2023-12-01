@@ -35,7 +35,6 @@ class rope
                         $knots[$knot + 1]['x'] += ($knots[$knot]['x'] <=> $knots[$knot + 1]['x']);
                         $knots[$knot + 1]['y'] += ($knots[$knot]['y'] <=> $knots[$knot + 1]['y']);
                     }
-
                 }
                 $touched['x' . $knots[$length]['x'] . 'y' . $knots[$length]['y']] = 1;
             }
