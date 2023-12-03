@@ -1,6 +1,6 @@
 <?php
-include "elfenclass.php";
-$elfen = new elfenrechner();
+include "./numbercalc.php";
+$numbercalc = new numbercalc();
 ?>
 
 <html>
@@ -8,8 +8,8 @@ $elfen = new elfenrechner();
 <body>
 <h1>Advent of Code, Day 1, Elfen Calories</h1>
 <br/>
-Top Calories: <?= $elfen->getTopCalorie(); ?><br/>
-Top Tree Together: <?= $elfen->getTopTree(); ?> <br/>
+Numbers Added: <?= $numbercalc->getNumbers(); ?><br/>
+Numbers and String added: <?= $numbercalc->getNumbersWithString(); ?> <br/>
 <br/>
 <a href="/">Zurück</a>
 </body>
